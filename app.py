@@ -21,6 +21,7 @@ fig_2 = px.scatter_3d(df_2, x="Joly", y="Coderre", z="Bergeron", color="winner",
                       symbol="result", color_discrete_map = {"Joly": "blue", "Bergeron": "green", "Coderre":"red"})
 
 ##############################################################################
+'''
 import folium
 
 
@@ -55,7 +56,7 @@ title_html = '''
 m.get_root().html.add_child(folium.Element(title_html))
 
 m.save('map-with-title.html')
-
+'''
 ##############################################################################
 
 
@@ -64,7 +65,7 @@ m.save('map-with-title.html')
 # Layout HTML
 app.layout = html.Div(children=[
     html.H1(children='Dashboard Prueba'),
-    html.Iframe(id='map', srcDoc=open('map-with-title.html','r').read(),width='100%', height='600'),
+    #html.Iframe(id='map', srcDoc=open('map-with-title.html','r').read(),width='100%', height='600'),
     ddc.Graph(id='example-graph', figure=fig),
     ddc.Graph(id='example-3d', figure=fig_2)
 ])
