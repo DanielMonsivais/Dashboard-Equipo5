@@ -25,7 +25,7 @@ fig_2 = px.scatter_3d(df_2, x="Joly", y="Coderre", z="Bergeron", color="winner",
 import folium
 import geopandas as gpd 
 
-state_data=pd.read_csv('https://raw.githubusercontent.com/DanielMonsivais/PRUEBAM/main/Tasa%20de%20Obesidad%202018.csv')
+state_data=pd.read_csv('https://raw.githubusercontent.com/DanielMonsivais/PRUEBAM/main/dataset/Tasa%20de%20Obesidad%202018.csv')
 state_data=state_data.replace({"Coahuila de Zaragoza": "Coahuila","Michoacán de Ocampo":"Michoacán","Veracruz de Ignacio de la Llave":"Veracruz"})
 state_geo ='https://raw.githubusercontent.com/DanielMonsivais/PRUEBAM/main/mexico.json'
 
