@@ -23,11 +23,15 @@ fig_2 = px.scatter_3d(df_2, x="Joly", y="Coderre", z="Bergeron", color="winner",
 ##############################################################################
 
 import folium
-
+import geopandas as gpd 
 
 state_data=pd.read_csv('https://raw.githubusercontent.com/DanielMonsivais/PRUEBAM/main/Tasa%20de%20Obesidad%202018.csv')
 state_data=state_data.replace({"Coahuila de Zaragoza": "Coahuila","Michoacán de Ocampo":"Michoacán","Veracruz de Ignacio de la Llave":"Veracruz"})
 state_geo ='https://raw.githubusercontent.com/DanielMonsivais/PRUEBAM/main/mexico.json'
+
+data_geo = gpd.read_file(state_geo)
+data_geo = data_geo.rename(columns={'name':'Entidad'})
+geo=data_geo.merge(state_data,on="Entidad")
 
 #Ubicación de México en el mapa
 m = folium.Map(location=[24, -102], zoom_start=5, width='70%', height='70%',tiles='Stamen Watercolor')
@@ -47,6 +51,29 @@ folium.Choropleth(
     line_opacity=0.4,
     legend_name='Tasa de Obesidad'
 ).add_to(m)
+
+style_function = lambda x: {'fillColor': '#ffffff', 
+                            'color':'#000000', 
+                            'fillOpacity': 0.1, 
+                            'weight': 0.1}
+highlight_function = lambda x: {'fillColor': '#000000', 
+                                'color':'#000000', 
+                                'fillOpacity': 0.7, 
+                                'weight': 0.1}
+NIL = folium.features.GeoJson(
+    geo,
+    style_function=style_function, 
+    control=False,
+    highlight_function=highlight_function, 
+    tooltip=folium.features.GeoJsonTooltip(
+        fields=['Entidad','Tasa de obesidad'],
+        aliases=['Estado: ','Tasa de obesidad: '],
+        style=("background-color: white; color: #333333; font-family: arial; font-size: 12px; padding: 10px;") 
+    )
+)
+m.add_child(NIL)
+m.keep_in_front(NIL)
+folium.LayerControl().add_to(m)
 
 loc = 'Tasa de Obesidad'
 title_html = '''
