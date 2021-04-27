@@ -5,6 +5,7 @@ import plotly.express as px
 import pandas as pd
 # Aplicacion principal
 app = dash.Dash(__name__)
+server = app.server
 
 # Datos de pandas
 df = pd.DataFrame({
