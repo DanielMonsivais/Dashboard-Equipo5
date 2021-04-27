@@ -1,5 +1,5 @@
 import dash
-import dash_core_components as ddc
+import dash_core_components as dcc
 import dash_html_components as html
 import plotly.express as px
 import pandas as pd
@@ -101,7 +101,7 @@ app.layout = html.Div(style={'backgroundColor': colors['background']}, children=
             'textAlign': 'center',
             'color': colors['text']
         }),
-    ddc.Markdown(children="""
+    dcc.Markdown(children="""
      En México, así como en el mundo, las defunciones causadas por enfermedades cardiovasculares (ECV) han ocupado el primer lugar entre las 
      principales causas durante varios años, entre ellas, destacan las enfermedades isquémicas del corazón que presentan una alta incidencia 
      entre la población que fallece a partir de los 45 años.
@@ -111,9 +111,10 @@ app.layout = html.Div(style={'backgroundColor': colors['background']}, children=
     , style={
         'color': colors['text']
     }),
-    html.Iframe(id='map', srcDoc=open('map-with-title.html','r').read(),width='100%', height='600'),
-    ddc.Graph(id='example-graph', figure=fig),
-    ddc.Graph(id='example-3d', figure=fig_2)
+    html.P(align="center")
+    html.Iframe(id='map', srcDoc=open('map-with-title.html','r').read(),width='930', height='475'),
+    dcc.Graph(id='example-graph', figure=fig),
+    dcc.Graph(id='example-3d', figure=fig_2)
 ])
 
 if __name__ == '__main__':
