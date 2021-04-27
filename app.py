@@ -105,14 +105,13 @@ app.layout = html.Div(style={'backgroundColor': colors['background']}, children=
     ddc.Graph(id='example-graph', figure=fig),
     ddc.Graph(id='example-3d', figure=fig_2),
     dcc.Markdown(children="""
-     En México, así como en el mundo, las defunciones causadas por enfermedades cardiovasculares (ECV) han ocupado el primer lugar entre las 
-     principales causas durante varios años, entre ellas, destacan las enfermedades isquémicas del corazón que presentan una alta incidencia 
-     entre la población que fallece a partir de los 45 años.
-     Entre los factores de riesgo que se asocian con la enfermedad coronaria se tiene: la edad, sexo, tabaquismo, diabetes, hipertensión 
-     arterial, obesidad, sobrepeso y sedentarismo.
-     """, style={
+    ## Casos de Covid-19
+    Este es un dashboard de ejemplo donde mostramos la información recogida de la API [covid19api.com](https://api.covid19api.com/) de casos confirmados diferentes países de America Latina.
+    Para mostrar estos resultados, se utilizó [Dash](https://dash.plotly.com/) y [Heroku](https://dashboard.heroku.com) para subir este código a la nube.
+    Código fuente: https://github.com/checor/covid-dashboard
+    """, style={
         'color': colors['text']
-    }),
+    })
 ])
 
 if __name__ == '__main__':
