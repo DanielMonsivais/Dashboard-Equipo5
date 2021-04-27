@@ -7,6 +7,11 @@ import pandas as pd
 app = dash.Dash(__name__)
 server = app.server
 
+colors = {
+    'background': "#C9DDD3",
+    'text': "#000000"
+}
+
 # Datos de pandas
 df = pd.DataFrame({
     "Fruit": ["Apples", "Oranges", "Bananas", "Apples", "Oranges", "Bananas"],
@@ -90,8 +95,21 @@ m.save('map-with-title.html')
 
 
 # Layout HTML
-app.layout = html.Div(children=[
-    html.H1(children='Dashboard Prueba'),
+app.layout = html.Div(style={'backgroundColor': colors['background']}, children=[
+    html.H1(children='Dashboard Prueba',
+           style={
+            'textAlign': 'center',
+            'color': colors['text']
+        }),
+     dcc.Markdown(children="""
+    En México, así como en el mundo, las defunciones causadas por enfermedades cardiovasculares (ECV) han ocupado el primer lugar entre las 
+    principales causas durante varios años, entre ellas, destacan las enfermedades isquémicas del corazón que presentan una alta incidencia 
+    entre la población que fallece a partir de los 45 años.
+    Entre los factores de riesgo que se asocian con la enfermedad coronaria se tiene: la edad, sexo, tabaquismo, diabetes, hipertensión 
+    arterial, obesidad, sobrepeso y sedentarismo.
+    """, style={
+        'color': colors['text']
+    }),
     html.Iframe(id='map', srcDoc=open('map-with-title.html','r').read(),width='100%', height='600'),
     ddc.Graph(id='example-graph', figure=fig),
     ddc.Graph(id='example-3d', figure=fig_2)
