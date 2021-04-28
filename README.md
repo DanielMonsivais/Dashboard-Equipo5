@@ -1,13 +1,11 @@
-# Dashboard-Equipo5
-
-# Proyecto módulo 4 BEDU
 # FACTORES DE ENFERMEDADES CARDÍACAS
+Este es un dashboard que muestra unos mapas interactivos asociados a los factores de enfermedades cardíacas en México.
 
 # Equipo 5
 INTEGRANTES: 
 
- Juan Daniel Álvarez Monsivais
+*Juan Daniel Álvarez Monsivais
 
- Angelica Patricia Fuentes Gómez
+*Angelica Patricia Fuentes Gómez
 
- Ivonne Ramírez Día
+*Ivonne Ramírez Día
