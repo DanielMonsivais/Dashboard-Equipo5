@@ -101,7 +101,7 @@ app.layout = html.Div(style={'backgroundColor': colors['background']}, children=
             'textAlign': 'center',
             'color': colors['text']
         }),
-    dcc.Markdown(style={font-size: "17px"}, children="""
+    dcc.Markdown(style={'height':'17px'}children="""
      En México, así como en el mundo, las defunciones causadas por enfermedades cardiovasculares (ECV) han ocupado el primer lugar entre las 
      principales causas durante varios años, entre ellas, destacan las enfermedades isquémicas del corazón que presentan una alta incidencia 
      entre la población que fallece a partir de los 45 años.
