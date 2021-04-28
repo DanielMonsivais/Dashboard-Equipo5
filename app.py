@@ -39,7 +39,7 @@ data_geo = data_geo.rename(columns={'name':'Entidad'})
 geo=data_geo.merge(state_data,on="Entidad")
 
 #Ubicación de México en el mapa
-m = folium.Map(location=[24, -102], zoom_start=5, width=930, height=475,tiles='Stamen Watercolor')
+m = folium.Map(location=[24, -102], zoom_start=5, width=930, height=523,tiles='Stamen Watercolor')
 #Tiles [OpenStreetMap, Mapbox Bright, Mapbox Control Room, Stamen Terrain, Stamen Toner, Stamen Watercolor, CartoDB positron, CartoDB dark_matter]
 
 
@@ -101,7 +101,7 @@ app.layout = html.Div(style={'backgroundColor': colors['background']}, children=
             'textAlign': 'center',
             'color': colors['text']
         }),
-    dcc.Markdown(children="""
+    dcc.Markdown(font-size=17, children="""
      En México, así como en el mundo, las defunciones causadas por enfermedades cardiovasculares (ECV) han ocupado el primer lugar entre las 
      principales causas durante varios años, entre ellas, destacan las enfermedades isquémicas del corazón que presentan una alta incidencia 
      entre la población que fallece a partir de los 45 años.
@@ -111,7 +111,7 @@ app.layout = html.Div(style={'backgroundColor': colors['background']}, children=
     , style={
         'color': colors['text']
     }),
-    html.Iframe(id='map', srcDoc=open('map-with-title.html','r').read(),width='930', height='475'),
+    html.Iframe(id='map', srcDoc=open('map-with-title.html','r').read(),width='930', height='523', align="center"),
     dcc.Graph(id='example-graph', figure=fig),
     dcc.Graph(id='example-3d', figure=fig_2)
 ])
