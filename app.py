@@ -39,7 +39,7 @@ data_geo = data_geo.rename(columns={'name':'Entidad'})
 geo=data_geo.merge(state_data,on="Entidad")
 
 #Ubicación de México en el mapa
-m = folium.Map(location=[24, -102], zoom_start=5, width='930', height='475',tiles='Stamen Watercolor')
+m = folium.Map(location=[24, -102], zoom_start=5, width=930, height=475,tiles='Stamen Watercolor')
 #Tiles [OpenStreetMap, Mapbox Bright, Mapbox Control Room, Stamen Terrain, Stamen Toner, Stamen Watercolor, CartoDB positron, CartoDB dark_matter]
 
 
