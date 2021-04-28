@@ -9,7 +9,8 @@ server = app.server
 
 colors = {
     'background': "#C9DDD3",
-    'text': "#000000"
+    'text': "#000000",
+    'sub': "#8C8888",
 }
 
 
@@ -120,6 +121,33 @@ m.save('map-porcentajes.html')
 
 
 ##############################################################################
+#Código para obtener el csv a través de la API
+#irecc=pd.read_csv('https://raw.githubusercontent.com/angyf/proyecto/main/Direcciones.csv')
+#from geopy.geocoders import Bing
+#geolocator = Bing("AhzzZWFo6COn8x2J_HbNv6eancFFyXmgCqU9LEJ5Emsk1yW2flEZpbF2-oMNgVxN")
+
+#longitud=[]
+#latitud=[]
+#for i in direcc.index: 
+#     location = geolocator.geocode(direcc['Dirección'][i])
+#     lat=[location.latitude]
+#     lon=[location.longitude]
+#     longitud.append(lon)
+#     latitud.append(lat)
+
+#longit=[]
+#for i in range(0,len(longitud)):
+#  longit.append(longitud[i][0])
+
+#latit=[]
+#for i in range(0,len(latitud)):
+#  latit.append(latitud[i][0])
+
+#direcc['longitud']=longit
+#direcc['latitud']=latit
+#direcc.to_csv('Direcc-coord.csv')
+
+##############################################################################
 #Mapa Defunciones
 data=pd.read_csv('https://raw.githubusercontent.com/angyf/proyecto/main/Tasa_Mortalidad_Cardiovascular_Serie_Historica.csv')
 
@@ -205,18 +233,41 @@ app.layout = html.Div(style={'backgroundColor': colors['background']}, children=
             'textAlign': 'center',
             'color': colors['text']
         }),
+     html.H4(children='BEDU--EQUIPO 5--DATA SCIENCE--SANTANDER',
+           style={
+            'textAlign': 'center',
+            'color': colors['sub']
+        }),
     dcc.Markdown(children="""
      En México, así como en el mundo, las defunciones causadas por enfermedades cardiovasculares (ECV) han ocupado el primer lugar entre las 
      principales causas durante varios años, entre ellas, destacan las enfermedades isquémicas del corazón que presentan una alta incidencia 
      entre la población que fallece a partir de los 45 años.
      Entre los factores de riesgo que se asocian con la enfermedad coronaria se tiene: la edad, sexo, tabaquismo, diabetes, hipertensión 
      arterial, obesidad, sobrepeso y sedentarismo.
+     A continuación, se muestra un mapa de con porcentajes de los principales factores de risgo asociados a la población de cada estado de 
+     México. \n\n
      """
     , style={
         'color': colors['text']
     }),
-    html.Iframe(id='map', srcDoc=open('map-porcentajes.html','r').read(),width='1332', height='597'),
-    html.Iframe(id='map2', srcDoc=open('defunciones.html','r',encoding="utf8").read(),width='1332', height='550')
+    html.Iframe(id='map', srcDoc=open('map-porcentajes.html','r').read(),width='1329', height='597'),
+    dcc.Markdown(children="""
+     Asimismo se tiene un mapa que muestra el número de defunciones por estado a causa de enfermedades cardiovasculares durante el año 2013, así
+     como la ubicación de los principales centros de salud especializados en cardiología a lo largo de todo el territorio nacional, donde se puede
+     apreciar una clara concordancia.\n\n
+     """
+    , style={
+        'color': colors['text']
+    }),
+    html.Iframe(id='map2', srcDoc=open('defunciones.html','r',encoding="utf8").read(),width='1329', height='580'),
+    dcc.Markdown(children="""
+     \n\n Para mostrar estos resultados, se utilizó [Dash](https://dash.plotly.com/) y [Heroku](https://dashboard.heroku.com) para subir este código 
+     a la nube. Para obtener los datos de las ubicaciones se utilizó la API de Bing Maps.
+    Código fuente: https://github.com/DanielMonsivais/Dashboard-Equipo5
+     """
+    , style={
+        'color': colors['text']
+    }),
     
 ])
 
