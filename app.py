@@ -176,7 +176,11 @@ n.get_root().html.add_child(folium.Element(title_html))
 
 
 folium.LayerControl().add_to(n)
-
+for i in direcc.index:
+  folium.Marker(
+    location=[direcc['latitud'][i],direcc['longitud'][i]],
+    popup=direcc['Centro'][i],
+    ).add_to(n)
 
 #Se añade un for que va añadiendo los marcadores, tomando las coordenadas y el nombre del dataframe
 
@@ -205,7 +209,7 @@ app.layout = html.Div(style={'backgroundColor': colors['background']}, children=
         'color': colors['text']
     }),
     html.Iframe(id='map', srcDoc=open('map-porcentajes.html','r').read(),width='100%', height='523'),
-    html.Iframe(id='map2', srcDoc=open('defunciones.html','r').read(),width='100%', height='523')
+    html.Iframe(id='map', srcDoc=open('defunciones.html','r').read(),width='100%', height='523')
     
 ])
 
