@@ -130,7 +130,7 @@ direcc=pd.read_csv('https://raw.githubusercontent.com/angyf/proyecto/main/Direcc
 
 #Se crea el mapa de igual forma al anterior
 
-m = folium.Map(location=[24, -102], zoom_start=5, width='70%', height='70%')
+n = folium.Map(location=[24, -102], zoom_start=5, width='70%', height='70%')
 
 folium.Choropleth(
     geo_data=state_geo,
@@ -142,7 +142,7 @@ folium.Choropleth(
     fill_opacity=1,
     line_opacity=0.4,
     legend_name='Defunciones por Enfermedades Cardiovasculares'
-).add_to(m)
+).add_to(n)
 
 
 style_function = lambda x: {'fillColor': '#ffffff', 
@@ -164,18 +164,18 @@ NIL = folium.features.GeoJson(
         style=("background-color: white; color: #333333; font-family: arial; font-size: 12px; padding: 10px;") 
     )
 )
-m.add_child(NIL)
-m.keep_in_front(NIL)
+n.add_child(NIL)
+n.keep_in_front(NIL)
 
 
 loc = 'Tasa de Mortalidad por Enfermedades Cardiovasculares 2013'
 title_html = '''
              <h3 style="font-size:20px"><b>{}</b></h3><br>
              '''.format(loc)
-m.get_root().html.add_child(folium.Element(title_html))
+n.get_root().html.add_child(folium.Element(title_html))
 
 
-folium.LayerControl().add_to(m)
+folium.LayerControl().add_to(n)
 
 
 #Se añade un for que va añadiendo los marcadores, tomando las coordenadas y el nombre del dataframe
@@ -183,9 +183,9 @@ for i in direcc.index:
   folium.Marker(
     location=direcc['Coordenadas'][i],
     popup=direcc['Centro'][i],
-    ).add_to(m)
+    ).add_to(n)
 
-m.save('defunciones.html')
+n.save('defunciones.html')
 
 ##############################################################################
 
@@ -208,7 +208,9 @@ app.layout = html.Div(style={'backgroundColor': colors['background']}, children=
     , style={
         'color': colors['text']
     }),
-    html.Iframe(id='map', srcDoc=open('map-porcentajes.html','r').read(),width='100%', height='523')
+    html.Iframe(id='map', srcDoc=open('map-porcentajes.html','r').read(),width='100%', height='523'),
+    html.Iframe(id='map', srcDoc=open('defunciones.html','r').read(),width='100%', height='523')
+    
 ])
 
 if __name__ == '__main__':
