@@ -98,7 +98,7 @@ m.save('map-with-title.html')
 app.layout = html.Div(style={'backgroundColor': colors['background'], 'align': 'center'}, children=[
     html.H1(children='Dashboard Enfermedades Cardiovasculares',
            style={
-            'textAlign': 'right',
+            
             'color': colors['text']
         }),
     dcc.Markdown(children="""
