@@ -4,8 +4,8 @@ Este es un dashboard que muestra mapas interactivos asociados a los factores de 
 # Equipo 5
 INTEGRANTES: 
 
-**Juan Daniel Álvarez Monsivais
+-Juan Daniel Álvarez Monsivais
 
-**Angelica Patricia Fuentes Gómez
+-Angelica Patricia Fuentes Gómez
 
-**Ivonne Ramírez Día
+-Ivonne Ramírez Día
