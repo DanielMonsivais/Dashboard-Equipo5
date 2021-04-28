@@ -28,7 +28,7 @@ df=pd.read_csv('https://raw.githubusercontent.com/angyf/proyecto/main/Datos-porc
 df=df.replace({"Coahuila de Zaragoza": "Coahuila","Michoacán de Ocampo":"Michoacán","Veracruz de Ignacio de la Llave":"Veracruz", "Querétaro de Arteaga":"Querétaro"})
 geo_porc=data_geo.merge(df,on="Entidad")
 #Se crea el mapa, añadiendo las coordenadas de la ubicación de México
-m = folium.Map(location=[24, -102], zoom_start=5, width='70%', height='100%',tiles='Stamen Watercolor')
+m = folium.Map(location=[24, -102], zoom_start=5, width='100%', height='100%',tiles='Stamen Watercolor')
 
 #Se crean los Mapas Coropléticos, manejando el geojson de forma separada
 
@@ -135,7 +135,7 @@ direcc=pd.read_csv('https://raw.githubusercontent.com/angyf/proyecto/main/Direcc
 
 #Se crea el mapa de igual forma al anterior
 
-n = folium.Map(location=[24, -102], zoom_start=5, width='70%', height='70%')
+n = folium.Map(location=[24, -102], zoom_start=5, width='100%', height='100%')
 
 folium.Choropleth(
     geo_data=state_geo,
@@ -215,8 +215,8 @@ app.layout = html.Div(style={'backgroundColor': colors['background']}, children=
     , style={
         'color': colors['text']
     }),
-    html.Iframe(id='map', srcDoc=open('map-porcentajes.html','r').read(),width='100%', height='597'),
-    html.Iframe(id='map2', srcDoc=open('defunciones.html','r',encoding="utf8").read(),width='100%', height='523')
+    html.Iframe(id='map', srcDoc=open('map-porcentajes.html','r').read(),width='1332', height='597'),
+    html.Iframe(id='map2', srcDoc=open('defunciones.html','r',encoding="utf8").read(),width='1332', height='550')
     
 ])
 
