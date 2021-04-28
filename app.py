@@ -263,7 +263,9 @@ app.layout = html.Div(style={'backgroundColor': colors['background']}, children=
     dcc.Markdown(children="""
      \n\n Para mostrar estos resultados, se utilizó [Dash](https://dash.plotly.com/) y [Heroku](https://dashboard.heroku.com) para subir este código 
      a la nube. Para obtener los datos de las ubicaciones se utilizó la API de Bing Maps.
-    Código fuente: https://github.com/DanielMonsivais/Dashboard-Equipo5 \n\n\n\n\n\n
+     
+     
+     Código fuente: https://github.com/DanielMonsivais/Dashboard-Equipo5 \n\n\n\n\n\n
     
     
     
