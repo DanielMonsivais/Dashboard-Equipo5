@@ -126,7 +126,7 @@ data=data[data['Entidad']!="Nacional"]
 data_2013=data[data['Periodo']==2013]
 geo_2013=data_geo.merge(data_2013,on="Entidad")
 
-direcc=pd.read_csv('https://raw.githubusercontent.com/angyf/proyecto/main/Direcciones-coord.csv')
+direcc=pd.read_csv('https://raw.githubusercontent.com/angyf/proyecto/main/Direcc-coord.csv')
 
 #Se crea el mapa de igual forma al anterior
 
@@ -181,7 +181,7 @@ folium.LayerControl().add_to(n)
 #Se añade un for que va añadiendo los marcadores, tomando las coordenadas y el nombre del dataframe
 for i in direcc.index:
   folium.Marker(
-    location=direcc['Coordenadas'][i],
+    location=[direcc['latitud'][i],direcc['longitud'][i]]
     popup=direcc['Centro'][i],
     ).add_to(n)
 
