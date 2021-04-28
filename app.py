@@ -39,7 +39,7 @@ data_geo = data_geo.rename(columns={'name':'Entidad'})
 geo=data_geo.merge(state_data,on="Entidad")
 
 #Ubicación de México en el mapa
-m = folium.Map(location=[24, -102], zoom_start=5, width=930, height=523,tiles='Stamen Watercolor')
+m = folium.Map(location=[24, -102], zoom_start=5, width=1332, height=523,tiles='Stamen Watercolor')
 #Tiles [OpenStreetMap, Mapbox Bright, Mapbox Control Room, Stamen Terrain, Stamen Toner, Stamen Watercolor, CartoDB positron, CartoDB dark_matter]
 
 
@@ -95,10 +95,10 @@ m.save('map-with-title.html')
 
 
 # Layout HTML
-app.layout = html.Div(style={'backgroundColor': colors['background'], 'align': 'center'}, children=[
+app.layout = html.Div(style={'backgroundColor': colors['background']}, children=[
     html.H1(children='Dashboard Enfermedades Cardiovasculares',
            style={
-            
+            'textAlign': 'right',
             'color': colors['text']
         }),
     dcc.Markdown(children="""
@@ -111,7 +111,7 @@ app.layout = html.Div(style={'backgroundColor': colors['background'], 'align': '
     , style={
         'color': colors['text']
     }),
-    html.Iframe(id='map', srcDoc=open('map-with-title.html','r').read(),width='930', height='523'),
+    html.Iframe(id='map', srcDoc=open('map-with-title.html','r').read(),width='100%', height='523'),
     dcc.Graph(id='example-graph', figure=fig),
     dcc.Graph(id='example-3d', figure=fig_2)
 ])
