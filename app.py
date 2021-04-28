@@ -181,7 +181,7 @@ folium.LayerControl().add_to(n)
 #Se añade un for que va añadiendo los marcadores, tomando las coordenadas y el nombre del dataframe
 for i in direcc.index:
   folium.Marker(
-    location=[direcc['latitud'][i],direcc['longitud'][i]]
+    location=[direcc['latitud'][i],direcc['longitud'][i]],
     popup=direcc['Centro'][i],
     ).add_to(n)
 
