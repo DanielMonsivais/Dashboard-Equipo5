@@ -21,11 +21,11 @@ import geopandas as gpd
 
 state_geo ='https://raw.githubusercontent.com/angyf/proyecto/main/mexico.json'
 data_geo = gpd.read_file(state_geo)
-geo_porc=data_geo.merge(df,on="Entidad")
+
 
 df=pd.read_csv('https://raw.githubusercontent.com/angyf/proyecto/main/Datos-porcentaje-poblacion-mayor-20.csv',index_col=0)
 df=df.replace({"Coahuila de Zaragoza": "Coahuila","Michoacán de Ocampo":"Michoacán","Veracruz de Ignacio de la Llave":"Veracruz", "Querétaro de Arteaga":"Querétaro"})
-
+geo_porc=data_geo.merge(df,on="Entidad")
 #Se crea el mapa, añadiendo las coordenadas de la ubicación de México
 m = folium.Map(location=[24, -102], zoom_start=5, width='70%', height='100%',tiles='Stamen Watercolor')
 
