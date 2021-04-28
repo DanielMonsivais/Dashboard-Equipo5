@@ -95,13 +95,13 @@ m.save('map-with-title.html')
 
 
 # Layout HTML
-app.layout = html.Div(style={'backgroundColor': colors['background']}, children=[
+app.layout = html.Div(style={'backgroundColor': colors['background'], 'align': 'center'}, children=[
     html.H1(children='Dashboard Enfermedades Cardiovasculares',
            style={
-            'textAlign': 'center',
+            'textAlign': 'right',
             'color': colors['text']
         }),
-    dcc.Markdown(style={'height':'17px'},children="""
+    dcc.Markdown(children="""
      En México, así como en el mundo, las defunciones causadas por enfermedades cardiovasculares (ECV) han ocupado el primer lugar entre las 
      principales causas durante varios años, entre ellas, destacan las enfermedades isquémicas del corazón que presentan una alta incidencia 
      entre la población que fallece a partir de los 45 años.
