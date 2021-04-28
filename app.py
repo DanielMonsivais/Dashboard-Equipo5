@@ -244,7 +244,7 @@ app.layout = html.Div(style={'backgroundColor': colors['background']}, children=
      entre la población que fallece a partir de los 45 años.
      Entre los factores de riesgo que se asocian con la enfermedad coronaria se tiene: la edad, sexo, tabaquismo, diabetes, hipertensión 
      arterial, obesidad, sobrepeso y sedentarismo.
-     A continuación, se muestra un mapa de con porcentajes de los principales factores de risgo asociados a la población de cada estado de 
+     A continuación, se muestra un mapa de los porcentajes de los principales factores de risgo asociados a la población de cada estado de 
      México. \n\n
      """
     , style={
@@ -263,7 +263,7 @@ app.layout = html.Div(style={'backgroundColor': colors['background']}, children=
     dcc.Markdown(children="""
      \n\n Para mostrar estos resultados, se utilizó [Dash](https://dash.plotly.com/) y [Heroku](https://dashboard.heroku.com) para subir este código 
      a la nube. Para obtener los datos de las ubicaciones se utilizó la API de Bing Maps.
-    Código fuente: https://github.com/DanielMonsivais/Dashboard-Equipo5
+    Código fuente: https://github.com/DanielMonsivais/Dashboard-Equipo5 \n\n\n\n\n\n
      """
     , style={
         'color': colors['text']
