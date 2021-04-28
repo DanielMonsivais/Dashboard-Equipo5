@@ -208,8 +208,7 @@ app.layout = html.Div(style={'backgroundColor': colors['background']}, children=
     , style={
         'color': colors['text']
     }),
-    html.Iframe(id='map', srcDoc=open('map-porcentajes.html','r').read(),width='100%', height='523'),
-    html.Iframe(id='map', srcDoc=open('defunciones.html','r').read(),width='100%', height='523')
+    html.Iframe(id='map', srcDoc=open('map-porcentajes.html','r').read(),width='100%', height='523')
 ])
 
 if __name__ == '__main__':
