@@ -1,7 +1,7 @@
 import dash
 import dash_core_components as dcc
 import dash_html_components as html
-import plotly.express as px
+
 import pandas as pd
 # Aplicacion principal
 app = dash.Dash(__name__)
@@ -21,10 +21,10 @@ import geopandas as gpd
 
 state_geo ='https://raw.githubusercontent.com/angyf/proyecto/main/mexico.json'
 data_geo = gpd.read_file(state_geo)
+geo_porc=data_geo.merge(df,on="Entidad")
 
 df=pd.read_csv('https://raw.githubusercontent.com/angyf/proyecto/main/Datos-porcentaje-poblacion-mayor-20.csv',index_col=0)
 df=df.replace({"Coahuila de Zaragoza": "Coahuila","Michoacán de Ocampo":"Michoacán","Veracruz de Ignacio de la Llave":"Veracruz", "Querétaro de Arteaga":"Querétaro"})
-geo_porc=data_geo.merge(df,on="Entidad")
 
 #Se crea el mapa, añadiendo las coordenadas de la ubicación de México
 m = folium.Map(location=[24, -102], zoom_start=5, width='70%', height='100%',tiles='Stamen Watercolor')
@@ -82,6 +82,7 @@ highlight_function = lambda x: {'fillColor': '#000000',
                                 'color':'#000000', 
                                 'fillOpacity': 0.7, 
                                 'weight': 0.1}
+
 NIL = folium.features.GeoJson(
     geo_porc,
     style_function=style_function,
@@ -97,6 +98,8 @@ NIL = folium.features.GeoJson(
 )
 m.add_child(NIL)
 m.keep_in_front(NIL)
+
+
 
 #Se añade un título
 loc = 'Porcentajes de Prevalencia de enfermedades 2018.'
@@ -126,6 +129,7 @@ data=data[data['Entidad']!="Nacional"]
 data_2013=data[data['Periodo']==2013]
 geo_2013=data_geo.merge(data_2013,on="Entidad")
 
+
 direcc=pd.read_csv('https://raw.githubusercontent.com/angyf/proyecto/main/Direcc-coord.csv')
 
 #Se crea el mapa de igual forma al anterior
@@ -153,6 +157,7 @@ highlight_function = lambda x: {'fillColor': '#000000',
                                 'color':'#000000', 
                                 'fillOpacity': 0.7, 
                                 'weight': 0.1}
+
 NIL = folium.features.GeoJson(
     geo_2013,
     style_function=style_function, 
@@ -167,7 +172,6 @@ NIL = folium.features.GeoJson(
 n.add_child(NIL)
 n.keep_in_front(NIL)
 
-
 loc = 'Tasa de Mortalidad por Enfermedades Cardiovasculares 2013'
 title_html = '''
              <h3 style="font-size:20px"><b>{}</b></h3><br>
@@ -176,11 +180,13 @@ n.get_root().html.add_child(folium.Element(title_html))
 
 
 folium.LayerControl().add_to(n)
+
 for i in direcc.index:
   folium.Marker(
     location=[direcc['latitud'][i],direcc['longitud'][i]],
     popup=direcc['Centro'][i],
     ).add_to(n)
+
 
 #Se añade un for que va añadiendo los marcadores, tomando las coordenadas y el nombre del dataframe
 
@@ -208,8 +214,8 @@ app.layout = html.Div(style={'backgroundColor': colors['background']}, children=
     , style={
         'color': colors['text']
     }),
-    html.Iframe(id='map', srcDoc=open('map-porcentajes.html','r').read(),width='100%', height='523'),
-    html.Iframe(id='map', srcDoc=open('defunciones.html','r').read(),width='100%', height='523')
+    html.Iframe(id='map', srcDoc=open('map-porcentajes.html','r').read(),width='100%', height='597'),
+    html.Iframe(id='map2', srcDoc=open('defunciones.html','r',encoding="utf8").read(),width='100%', height='523')
     
 ])
 
