@@ -21,6 +21,7 @@ import geopandas as gpd
 
 state_geo ='https://raw.githubusercontent.com/angyf/proyecto/main/mexico.json'
 data_geo = gpd.read_file(state_geo)
+data_geo = data_geo.rename(columns={'name':'Entidad'})
 
 
 df=pd.read_csv('https://raw.githubusercontent.com/angyf/proyecto/main/Datos-porcentaje-poblacion-mayor-20.csv',index_col=0)
