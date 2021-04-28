@@ -245,7 +245,7 @@ app.layout = html.Div(style={'backgroundColor': colors['background']}, children=
      Entre los factores de riesgo que se asocian con la enfermedad coronaria se tiene: la edad, sexo, tabaquismo, diabetes, hipertensión 
      arterial, obesidad, sobrepeso y sedentarismo.
      A continuación, se muestra un mapa de los porcentajes de los principales factores de risgo asociados a la población de cada estado de 
-     México. \n\n
+     México. En él se observan porcentajes alarmantes, sobre todo en obesidad. \n\n
      """
     , style={
         'color': colors['text']
@@ -262,10 +262,9 @@ app.layout = html.Div(style={'backgroundColor': colors['background']}, children=
     html.Iframe(id='map2', srcDoc=open('defunciones.html','r',encoding="utf8").read(),width='1329', height='580'),
     dcc.Markdown(children="""
      \n\n Para mostrar estos resultados, se utilizó [Dash](https://dash.plotly.com/) y [Heroku](https://dashboard.heroku.com) para subir este código 
-     a la nube. Para obtener los datos de las ubicaciones se utilizó la API de Bing Maps.
+     a la nube. Para obtener los datos de las ubicaciones se utilizó la API de Bing Maps.\n\n
      
-     
-     Código fuente: https://github.com/DanielMonsivais/Dashboard-Equipo5 \n\n\n\n\n\n
+     Código fuente: https://github.com/DanielMonsivais/Dashboard-Equipo5 
     
     
     
