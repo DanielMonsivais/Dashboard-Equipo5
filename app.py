@@ -350,7 +350,7 @@ app.layout = html.Div(style={'backgroundColor': colors['background'], 'padding':
     , style={
         'color': colors['text']
     }),
-    html.Iframe(id='map', srcDoc=open('map-porcentajes.html','r').read(),width='1329', height='597'),
+    html.Iframe(id='map', srcDoc=open('map-porcentajes.html','r').read()),
     dcc.Markdown(children="""
      Asimismo se tiene un mapa que muestra el número de defunciones por estado a causa de enfermedades cardiovasculares durante el año 2013, así
      como la ubicación de los principales centros de salud especializados en cardiología a lo largo de todo el territorio nacional, donde se puede
