@@ -399,7 +399,7 @@ app.layout = html.Div(style={'backgroundColor': colors['background'], 'padding':
     }),
     html.Img(id = 'plot', src = 'https://raw.githubusercontent.com/DanielMonsivais/Dashboard-Equipo5/main/grafica.jpg'),
     
-    html.Iframe(id='dash',src="https://app.powerbi.com/view?r=eyJrIjoiNjhiODVkYmEtMjIzMy00MDc5LTg5ODQtNmY4MmYxZDhmMmZlIiwidCI6IjVmMjgyOTEwLTE3NmYtNDU5ZC1hYjdkLWI3NDRhYTZlZmMwNyIsImMiOjR9&pageName=ReportSection",style={"height": "1140px", "width": "542px"})
+    html.Iframe(id='dash',src="https://app.powerbi.com/view?r=eyJrIjoiNjhiODVkYmEtMjIzMy00MDc5LTg5ODQtNmY4MmYxZDhmMmZlIiwidCI6IjVmMjgyOTEwLTE3NmYtNDU5ZC1hYjdkLWI3NDRhYTZlZmMwNyIsImMiOjR9&pageName=ReportSection",style={"height": "542px", "width": "1140px", 'display':'inline-block'})
 ])
 
 if __name__ == '__main__':
