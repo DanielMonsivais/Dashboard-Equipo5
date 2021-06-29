@@ -149,78 +149,178 @@ m.save('map-porcentajes.html')
 
 ##############################################################################
 #Mapa Defunciones
+import pandas as pd
+import folium
+import geopandas as gpd
+
+state_geo ='https://raw.githubusercontent.com/angyf/proyecto/main/mexico.json'
+data_geo = gpd.read_file(state_geo)
+data_geo = data_geo.rename(columns={'name':'Entidad'})
+
+#Se lee el csv con las defunciones por estado
 data=pd.read_csv('https://raw.githubusercontent.com/angyf/proyecto/main/Tasa_Mortalidad_Cardiovascular_Serie_Historica.csv')
 
+#Se cambian los nombres de los estados para que coincidan con los del geojson
 data=data.replace({"Coahuila de Zaragoza": "Coahuila", "Distrito Federal": "Ciudad de México","Michoacán de Ocampo":"Michoacán","Veracruz Llave":"Veracruz", "Querétaro de Arteaga":"Querétaro"})
 data= data.rename(columns={'Entidad de Residencia':'Entidad'})
+
+#Se aplica un filtro para quitar las defunciones totales a nivel nacional
 data=data[data['Entidad']!="Nacional"]
 
+#Se aplica un filtro para obtener solo los datos más recientes 
 data_2013=data[data['Periodo']==2013]
+data_2012=data[data['Periodo']==2012]
+data_2011=data[data['Periodo']==2011]
+data_2010=data[data['Periodo']==2010]
+data_2009=data[data['Periodo']==2009]
+
+#Se crea un dataframe uniendo el geojson con el csv para tener toda la información de los estados en uno solo
 geo_2013=data_geo.merge(data_2013,on="Entidad")
+geo_2012=data_geo.merge(data_2012,on="Entidad")
+geo_2011=data_geo.merge(data_2011,on="Entidad")
+geo_2010=data_geo.merge(data_2010,on="Entidad")
+geo_2009=data_geo.merge(data_2009,on="Entidad")
+
+def folium_del_legend(choropleth: folium.Choropleth):
+  """A hack to remove choropleth legends.
+
+  The choropleth color-scaled legend sometimes looks too crowded. Until there is an
+  option to disable the legend, use this routine to remove any color map children
+  from the choropleth.
+
+  Args:
+    choropleth: Choropleth objected created by `folium.Choropleth()`
+
+  Returns:
+    The same object `choropleth` with any child whose name starts with
+    'color_map' removed.
+  """
+  del_list = []
+  for child in choropleth._children:
+    if child.startswith('color_map'):
+      del_list.append(child)
+  for del_item in del_list:
+    choropleth._children.pop(del_item)
+  return choropleth
+
+import numpy as np
+import branca
+import folium
+from branca.element import MacroElement
+from jinja2 import Template
+import sys
+
+sys.path.insert(0, 'folium')
+sys.path.insert(0, 'branca')
 
 
+class BindColormap(MacroElement):
+    """Binds a colormap to a given layer.
+
+    Parameters
+    ----------
+    colormap : branca.colormap.ColorMap
+        The colormap to bind.
+    """
+    def __init__(self, layer, colormap):
+        super(BindColormap, self).__init__()
+        self.layer = layer
+        self.colormap = colormap
+        self._template = Template(u"""
+        {% macro script(this, kwargs) %}
+            {{this.colormap.get_name()}}.svg[0][0].style.display = 'block';
+            {{this._parent.get_name()}}.on('overlayadd', function (eventLayer) {
+                if (eventLayer.layer == {{this.layer.get_name()}}) {
+                    {{this.colormap.get_name()}}.svg[0][0].style.display = 'block';
+                }});
+            {{this._parent.get_name()}}.on('overlayremove', function (eventLayer) {
+                if (eventLayer.layer == {{this.layer.get_name()}}) {
+                    {{this.colormap.get_name()}}.svg[0][0].style.display = 'none';
+                }});
+        {% endmacro %}
+        """)  # noqa
+        
 direcc=pd.read_csv('https://raw.githubusercontent.com/angyf/proyecto/main/Direcc-coord.csv')
+datos=[['2009',data_2009,geo_2009],['2010',data_2010,geo_2010],['2011',data_2011,geo_2011],['2012',data_2012,geo_2012],['2013',data_2013,geo_2013]]
 
-#Se crea el mapa de igual forma al anterior
+map = folium.Map(location=[24, -102], zoom_start=5, width='70%', height='70%')
 
-n = folium.Map(location=[24, -102], zoom_start=5, width='100%', height='100%')
+for dat in datos:
+  cm1 = branca.colormap.linear.BuPu_09.to_step(12).scale(dat[1]['Defunciones por Enfermedades Cardiovasculares'].min(),dat[1]['Defunciones por Enfermedades Cardiovasculares'].max()).add_to(map)
+  cm1.caption = "Defunciones por Enfermedades Cardiovasculares"
 
-folium.Choropleth(
-    geo_data=state_geo,
-    name='2013',
-    data=data_2013,
-    columns=['Entidad', 'Defunciones por Enfermedades Cardiovasculares'],
-    key_on='feature.properties.name',
-    fill_color='RdPu',
-    fill_opacity=1,
-    line_opacity=0.4,
-    legend_name='Defunciones por Enfermedades Cardiovasculares'
-).add_to(n)
+  if (dat[0]=='2013'):
+        mostrar=True
+  else:
+        mostrar=False
 
 
-style_function = lambda x: {'fillColor': '#ffffff', 
-                            'color':'#000000', 
-                            'fillOpacity': 0.1, 
-                            'weight': 0.1}
-highlight_function = lambda x: {'fillColor': '#000000', 
-                                'color':'#000000', 
-                                'fillOpacity': 0.7, 
-                                'weight': 0.1}
+  colorm= folium_del_legend(folium.Choropleth(
+      geo_data=state_geo,
+      name=dat[0],
+      data=dat[1],
+      columns=['Entidad', 'Defunciones por Enfermedades Cardiovasculares'],
+      key_on='feature.properties.name',
+      fill_color='BuPu',
+      fill_opacity=1,
+      line_opacity=0.4,
+      legend_name='Defunciones por Enfermedades Cardiovasculares',
+      show=mostrar
+  )).add_to(map)
 
-NIL = folium.features.GeoJson(
-    geo_2013,
-    style_function=style_function, 
-    control=False,
-    highlight_function=highlight_function, 
-    tooltip=folium.features.GeoJsonTooltip(
-        fields=['Entidad','Poblacion Total','Defunciones por Enfermedades Cardiovasculares', 'Tasa de Mortalidad por Enfermedades Cardiovasculares'],
-        aliases=['Estado: ','Población: ','Defunciones: ','Tasa de Mortalidad: '],
-        style=("background-color: white; color: #333333; font-family: arial; font-size: 12px; padding: 10px;") 
-    )
-)
-n.add_child(NIL)
-n.keep_in_front(NIL)
 
-loc = 'Tasa de Mortalidad por Enfermedades Cardiovasculares 2013'
+  style_function = lambda x: {'fillColor': '#ffffff', 
+                              'color':'#000000', 
+                              'fillOpacity': 0.1, 
+                              'weight': 0.1}
+  highlight_function = lambda x: {'fillColor': '#000000', 
+                                  'color':'#000000', 
+                                  'fillOpacity': 0.7, 
+                                  'weight': 0.1}
+  NIL = folium.features.GeoJson(
+      dat[2],
+      style_function=style_function, 
+      control=True,
+      highlight_function=highlight_function, 
+      tooltip=folium.features.GeoJsonTooltip(
+          fields=['Entidad','Poblacion Total','Defunciones por Enfermedades Cardiovasculares', 'Tasa de Mortalidad por Enfermedades Cardiovasculares','Periodo'],
+          aliases=['Estado: ','Población: ','Defunciones: ','Tasa de Mortalidad: ','Periodo: '],
+          style=("background-color: white; color: #333333; font-family: arial; font-size: 12px; padding: 10px;")
+      )
+  )
+  colorm.add_child(NIL)
+  map.add_child(BindColormap(colorm, cm1))
+
+
+feature_group = folium.FeatureGroup(name="Ubicaciones")
+for i in direcc.index:
+    folium.Marker(
+    location=[direcc['latitud'][i],direcc['longitud'][i]],
+    popup=direcc['Centro'][i],
+    icon=folium.Icon(color="red", icon="heartbeat",prefix='fa')
+    ).add_to(feature_group)
+    feature_group.add_to(map)
+#Más íconos en https://fontawesome.com/v4.7/icons/
+#heart, heart-o, medkit, hospital-o
+
+
+loc = 'Tasa de Mortalidad por Enfermedades Cardiovasculares 2009-2013'
 title_html = '''
              <h3 style="font-size:20px"><b>{}</b></h3><br>
              '''.format(loc)
-n.get_root().html.add_child(folium.Element(title_html))
+map.get_root().html.add_child(folium.Element(title_html))
 
 
-folium.LayerControl().add_to(n)
-
-for i in direcc.index:
-  folium.Marker(
-    location=[direcc['latitud'][i],direcc['longitud'][i]],
-    popup=direcc['Centro'][i],
-    ).add_to(n)
 
 
-#Se añade un for que va añadiendo los marcadores, tomando las coordenadas y el nombre del dataframe
 
 
-n.save('defunciones.html')
+
+folium.LayerControl().add_to(map)
+
+
+map.save('defunciones.html')
+
 
 ##############################################################################
 
