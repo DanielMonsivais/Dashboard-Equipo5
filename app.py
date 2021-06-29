@@ -322,7 +322,33 @@ map.save('defunciones.html')
 
 ##############################################################################
 #GRAFICA 
+import pandas as pd
+import matplotlib.pyplot as plt
+from matplotlib.ticker import FuncFormatter
 
+url='https://drive.google.com/file/d/1Q_ywhZHAJ1XDNlWsMe4ru2N9-Wqny_ZW/view?usp=sharing'
+path = 'https://drive.google.com/uc?export=download&id='+url.split('/')[-2]
+df = pd.read_csv(path)
+
+#filtramos solo a partir de 2010
+df=df[df['PERIODO']>2009]
+
+#Creamos el gráfico
+
+#Definimos un estilo oscuro para nuestros gráficos
+plt.style.use("dark_background")
+fig, ax = plt.subplots(figsize=(8,5))
+ax.xaxis.set_major_formatter(FuncFormatter(lambda x, p: format(int(x))))
+
+for i in ['TOTAL','HOMBRE','MUJER']:
+  ax.plot_date(df['PERIODO'],df[i],ls='-')
+
+ax.set_xlabel("Año",fontsize=18)
+ax.set_ylabel("Total",fontsize=18)
+ax.set_title("Mortalidad en México por enfermedades del corazón\n",fontsize=18, weight='bold')
+ax.legend(['Total','Hombres','Mujeres']);
+
+fig.savefig("grafica.jpg")
 
 
 ##############################################################################
