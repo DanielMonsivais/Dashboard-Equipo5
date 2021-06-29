@@ -397,9 +397,9 @@ app.layout = html.Div(style={'backgroundColor': colors['background'], 'padding':
      """, style={
         'color': colors['text']
     }),
-    html.Img(id = 'plot', src = 'https://raw.githubusercontent.com/DanielMonsivais/Dashboard-Equipo5/main/grafica.jpg')
+    html.Img(id = 'plot', src = 'https://raw.githubusercontent.com/DanielMonsivais/Dashboard-Equipo5/main/grafica.jpg'),
     
-    
+    html.Iframe(width="600" height="373.5" src="https://app.powerbi.com/view?r=eyJrIjoiNjhiODVkYmEtMjIzMy00MDc5LTg5ODQtNmY4MmYxZDhmMmZlIiwidCI6IjVmMjgyOTEwLTE3NmYtNDU5ZC1hYjdkLWI3NDRhYTZlZmMwNyIsImMiOjR9&pageName=ReportSection" frameborder="0" allowFullScreen="true")
 ])
 
 if __name__ == '__main__':
