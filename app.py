@@ -359,7 +359,7 @@ app.layout = html.Div(style={'backgroundColor': colors['background'], 'padding':
     , style={
         'color': colors['text']
     }),
-    html.Iframe(id='map2', srcDoc=open('defunciones.html','r',encoding="utf8").read(),width='100%', height='490',style={
+    html.Iframe(id='map2', srcDoc=open('defunciones.html','r',encoding="utf8").read(),width='927', height='490',style={
             'display':'flex', 'justify-content':'center'}),
     dcc.Markdown(children="""
      \n\n Para mostrar estos resultados, se utilizó [Dash](https://dash.plotly.com/) y [Heroku](https://dashboard.heroku.com) para subir este código a la nube. Para obtener los datos de las ubicaciones se utilizó la API de Bing Maps.              .
