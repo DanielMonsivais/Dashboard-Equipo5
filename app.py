@@ -397,7 +397,7 @@ app.layout = html.Div(style={'backgroundColor': colors['background'], 'padding':
      """, style={
         'color': colors['text']
     }),
-    html.Img(id = 'plot', src = 'grafica.jpg')
+    html.Img(id = 'plot', src = 'https://raw.githubusercontent.com/DanielMonsivais/Dashboard-Equipo5/main/grafica.jpg')
     
     
 ])
