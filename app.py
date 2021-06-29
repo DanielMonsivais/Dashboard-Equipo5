@@ -327,7 +327,7 @@ map.save('defunciones.html')
 
 
 # Layout HTML
-app.layout = html.Div(style={'backgroundColor': colors['background'], 'padding': '20px','margin-top' : '-20px', 'width':'100%','padding-top': '50px'}, children=[
+app.layout = html.Div(style={'backgroundColor': colors['background'], 'padding': '20px','margin-top' : '-20px', 'width':'100%','padding-top': '30px'}, children=[
     html.H1(children='Dashboard Enfermedades Cardiovasculares',
            style={
             'textAlign': 'center',
@@ -359,7 +359,8 @@ app.layout = html.Div(style={'backgroundColor': colors['background'], 'padding':
     , style={
         'color': colors['text']
     }),
-    html.Iframe(id='map2', srcDoc=open('defunciones.html','r',encoding="utf8").read(),width='927', height='485'),
+    html.Iframe(id='map2', srcDoc=open('defunciones.html','r',encoding="utf8").read(),width='auto', height='490',style={
+            'textAlign': 'center'),
     dcc.Markdown(children="""
      \n\n Para mostrar estos resultados, se utilizó [Dash](https://dash.plotly.com/) y [Heroku](https://dashboard.heroku.com) para subir este código a la nube. Para obtener los datos de las ubicaciones se utilizó la API de Bing Maps.              .
      Código fuente: https://github.com/DanielMonsivais/Dashboard-Equipo5 
