@@ -318,8 +318,8 @@ map.get_root().html.add_child(folium.Element(title_html))
 
 folium.LayerControl().add_to(map)
 
-
 map.save('defunciones.html')
+
 ##############################################################################
 #GRAFICA 
 import pandas as pd
@@ -397,7 +397,7 @@ app.layout = html.Div(style={'backgroundColor': colors['background'], 'padding':
      """, style={
         'color': colors['text']
     }),
-    html.Iframe(id='graf', srcDoc=open('grafica.jpg','r').read())
+    html.Img(id = 'plot', src = 'grafica.jpg')
     
 ])
 
