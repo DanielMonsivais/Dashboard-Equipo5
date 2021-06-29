@@ -397,7 +397,7 @@ app.layout = html.Div(style={'backgroundColor': colors['background'], 'padding':
      """, style={
         'color': colors['text']
     }),
-    html.Img(id = 'plot', src = 'grafica.jpg')
+    
     
 ])
 
