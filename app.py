@@ -327,7 +327,7 @@ map.save('defunciones.html')
 
 
 # Layout HTML
-app.layout = html.Div(style={'backgroundColor': colors['background'], 'padding-left': '50px','margin-top' : '-10px'}, children=[
+app.layout = html.Div(style={'backgroundColor': colors['background'], 'padding': '20px','margin-top' : '-20px', 'width':'100%','padding-top': '50px'}, children=[
     html.H1(children='Dashboard Enfermedades Cardiovasculares',
            style={
             'textAlign': 'center',
